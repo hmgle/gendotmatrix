@@ -18,8 +18,6 @@ def get_pix(image):
             # pix = image.getpixel((w, h))
             # print pix
     return bitmap
-    # with open('bin.tmp', 'wb') as myfile:
-    #     bitmap.tofile(myfile)
 
 def get_gb2312_pix(gb2312_code, w, h, usr_font):
     image = Image.new("RGB", (w, h), (255, 255, 255))
@@ -27,18 +25,13 @@ def get_gb2312_pix(gb2312_code, w, h, usr_font):
     try:
         unicode_code = gb2312_code.decode('gb2312')
         d_usr.text((0, 0), unicode_code, (0,0,0), font=usr_font)
-        return get_pix(image)
     except:
         d_usr.text((0, 0), u" ", (0,0,0), font=usr_font)
-        return get_pix(image)
+    return get_pix(image)
 
 def main():
-    # image = Image.new("RGB", (16, 16), (255, 255, 255))
     usr_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-microhei.ttc", 16)
     # # usr_font = ImageFont.truetype("/usr/share/fonts/truetype/takao/TakaoPGothic.ttf", 25)
-    # d_usr = ImageDraw.Draw(image)
-    # d_usr.text((0, 0), u"字", (0,0,0), font=usr_font)
-    # get_pix(image)
     with open('font16.tmp', 'wb') as outfile:
         # get_gb2312_pix('\xd7\xd6', 16, 16, usr_font)
         for i in range(0xA1, 0xF8):
