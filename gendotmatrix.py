@@ -14,22 +14,24 @@ def get_pix(image):
     bitmap = bitarray()
     for h in range(height):
         for w in range(width):
-            if int(sum(pixel[w, h])) > (255 * 3 / 2):
+            # if int(sum(pixel[w, h])) > (255 * 3 / 2):
+            if pixel[w, h] > 0:
                 bitmap.append(False)
             else:
                 bitmap.append(True)
-            # pix = image.getpixel((w, h))
-            # print pix
     return bitmap
 
 def get_gb2312_pix(gb2312_code, w, h, usr_font):
-    image = Image.new("RGB", (w, h), (255, 255, 255))
+    # image = Image.new("RGB", (w, h), (255, 255, 255))
+    image = Image.new("1", (w, h), (1))
     d_usr = ImageDraw.Draw(image)
     try:
         unicode_code = gb2312_code.decode('gb2312')
-        d_usr.text((0, 0), unicode_code, (0,0,0), font=usr_font)
+        # d_usr.text((0, 0), unicode_code, (0,0,0), font=usr_font)
+        d_usr.text((0, 0), unicode_code, (0), font=usr_font)
     except:
-        d_usr.text((0, 0), u" ", (0,0,0), font=usr_font)
+        # d_usr.text((0, 0), u" ", (0,0,0), font=usr_font)
+        d_usr.text((0, 0), u" ", (0), font=usr_font)
     return get_pix(image)
 
 def main():
