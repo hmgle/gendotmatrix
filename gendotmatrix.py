@@ -4,6 +4,9 @@
 from PIL import Image, ImageDraw, ImageFont
 import bitarray
 from bitarray import bitarray
+import getopt
+import sys
+import re
 
 def get_pix(image):
     pixel = image.load()
@@ -30,13 +33,47 @@ def get_gb2312_pix(gb2312_code, w, h, usr_font):
     return get_pix(image)
 
 def main():
-    usr_font = ImageFont.truetype("/usr/share/fonts/truetype/wqy/wqy-microhei.ttc", 16)
-    # # usr_font = ImageFont.truetype("/usr/share/fonts/truetype/takao/TakaoPGothic.ttf", 25)
-    with open('font16.tmp', 'wb') as outfile:
-        # get_gb2312_pix('\xd7\xd6', 16, 16, usr_font)
+    help = 'Usage: %s [option]' % sys.argv[0]
+    help += '''\noption:
+    -h | --help                                 display this information
+    -i | --truetype-file TrueType-font-file     specify TrueType file
+    -s | --size geometry                        width and height of font
+    -o | --output output-dot-matrix-font        specify output file
+    '''
+    short_opts = 'hi:s:o:'
+    opts = ['help', 'truetype-file=', 'size=', 'output=']
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], short_opts, opts)
+    except getopt.GetoptError as err:
+        print(err)
+        print(help)
+        sys.exit(1)
+
+    truetypefile = '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'
+    font_width = 16
+    font_height = 16
+    outfilename = 'dot_matrix.font'
+    for opt, arg in opts:
+        if opt in ('-h', '--help'):
+            print(help)
+            sys.exit()
+        elif opt in ('-i', '--truetype-file'):
+            truetypefile = arg
+        elif opt in ('-s', '--size'):
+            fontsize = re.split(r'\D', arg)
+            font_width = int(fontsize[0])
+            font_height = int(fontsize[1])
+        elif opt in ('-o', '--output'):
+            outfilename = arg
+        else:
+            print(help)
+            sys.exit(1)
+
+    usr_font = ImageFont.truetype(truetypefile, font_height)
+    with open(outfilename, 'wb') as outfile:
         for i in range(0xA1, 0xF8):
             for j in range(0xA1, 0xFF):
-                data = get_gb2312_pix(chr(i) + chr(j), 16, 16, usr_font)
+                data = get_gb2312_pix(chr(i) + chr(j), font_width, font_height, usr_font)
                 data.tofile(outfile)
 
 if __name__ == '__main__':
