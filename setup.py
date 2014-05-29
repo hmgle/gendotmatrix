@@ -10,6 +10,6 @@ setup(
     ),
     license="MIT",
     url="https://github.com/hmgle/gendotmatrix",
-    install_requires = ['bitarray', 'PIL', 'getopt'],
+    install_requires = ['bitarray', 'PIL'],
     scripts=['gendotmatrix.py']
 )
