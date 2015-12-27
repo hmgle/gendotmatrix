@@ -35,15 +35,16 @@ def get_gb2312_pix(gb2312_code, w, h, usr_font):
     return get_pix(image)
 
 def main():
-    help = 'Usage: %s [option]' % sys.argv[0]
+    help = 'Usage: %s [option] <truetype-file>' % sys.argv[0]
     help += '''\noption:
     -h | --help                                 display this information
-    -i | --truetype-file TrueType-font-file     specify TrueType file
     -s | --size geometry                        width and height of font
     -o | --output output-dot-matrix-font        specify output file
+example:
+    gendotmatrix.py -o ubuntu-c.font "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-C.ttf"
     '''
     short_opts = 'hi:s:o:'
-    opts = ['help', 'truetype-file=', 'size=', 'output=']
+    opts = ['help', 'size=', 'output=']
     try:
         opts, args = getopt.getopt(sys.argv[1:], short_opts, opts)
     except getopt.GetoptError as err:
@@ -51,7 +52,6 @@ def main():
         print(help)
         sys.exit(1)
 
-    truetypefile = ''
     font_width = 16
     font_height = 16
     outfilename = 'dot_matrix.font'
@@ -59,8 +59,6 @@ def main():
         if opt in ('-h', '--help'):
             print(help)
             sys.exit()
-        elif opt in ('-i', '--truetype-file'):
-            truetypefile = arg
         elif opt in ('-s', '--size'):
             fontsize = re.split(r'\D', arg)
             font_width = int(fontsize[0])
@@ -71,6 +69,10 @@ def main():
             print(help)
             sys.exit(1)
 
+    if len(args) > 0:
+        truetypefile = args[0]
+    else:
+        truetypefile = ''
     if not truetypefile:
         print(help)
         sys.exit(1)
