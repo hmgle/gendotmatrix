@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="gendotmatrix",
-    version="1.0",
+    version="1.1",
     author="hmgle",
     author_email="dustgle@gmail.com",
     description=(
@@ -10,6 +10,6 @@ setup(
     ),
     license="MIT",
     url="https://github.com/hmgle/gendotmatrix",
-    install_requires = ['bitarray', 'PIL'],
+    install_requires = ['bitarray', 'Pillow'],
     scripts=['gendotmatrix.py']
 )
