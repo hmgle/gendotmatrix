@@ -51,7 +51,7 @@ def main():
         print(help)
         sys.exit(1)
 
-    truetypefile = '/usr/share/fonts/truetype/wqy/wqy-microhei.ttc'
+    truetypefile = ''
     font_width = 16
     font_height = 16
     outfilename = 'dot_matrix.font'
@@ -71,6 +71,9 @@ def main():
             print(help)
             sys.exit(1)
 
+    if not truetypefile:
+        print(help)
+        sys.exit(1)
     usr_font = ImageFont.truetype(truetypefile, font_height)
     with open(outfilename, 'wb') as outfile:
         for i in range(0xA1, 0xF8):
