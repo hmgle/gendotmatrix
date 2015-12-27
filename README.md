@@ -1,17 +1,21 @@
-gendotmatrix
-============
+# gendotmatrix
 
-Gendotmatrix: a tool to extract dot matrix font from vector font
+**Gendotmatrix**: a tool to extract dot matrix font from vector font.
+
+## Install:
+
+```
+git clone https://github.com/hmgle/gendotmatrix.git
+cd gendotmatrix
+sudo python setup.py install
+```
+
+## Usage:
+
+```
+gendotmatrix.py --help
+```
 
 example:
 
-    gendotmatrix.py -o ubuntu-c.font "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-C.ttf"
-
-从矢量字库中提取出点阵字库
-
-使用方法：
-
-    ./gendotmatrix.py 矢量字库 -o 点阵字库 -s 32x32
-
-
-
+    gendotmatrix.py -o ubuntu-c.font  -s "32x32" "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-C.ttf"
