@@ -11,7 +11,7 @@ example:
 
 使用方法：
 
-	./gendotmatrix.py -i 矢量字库 -o 点阵字库 -s 32x32
+    ./gendotmatrix.py 矢量字库 -o 点阵字库 -s 32x32
 
 
 
