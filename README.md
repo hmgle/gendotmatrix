@@ -5,9 +5,7 @@
 ## Install:
 
 ```
-git clone https://github.com/hmgle/gendotmatrix.git
-cd gendotmatrix
-sudo python setup.py install
+pip install gendotmatrix
 ```
 
 ## Usage:
