@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name="gendotmatrix",
-    version="1.1.1",
+    version="1.1.2",
     author="hmgle",
     author_email="dustgle@gmail.com",
     description=(
