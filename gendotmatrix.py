@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from PIL import Image, ImageDraw, ImageFont
@@ -41,7 +41,7 @@ def main():
     -s | --size geometry                        width and height of font
     -o | --output output-dot-matrix-font        specify output file
 example:
-    gendotmatrix.py -o ubuntu-c.font "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-C.ttf"
+    gendotmatrix.py -s 16x16 -o ubuntu-c.font "/usr/share/fonts/truetype/ubuntu-font-family/Ubuntu-C.ttf"
     '''
     short_opts = 'hi:s:o:'
     opts = ['help', 'size=', 'output=']
@@ -72,8 +72,6 @@ example:
     if len(args) > 0:
         truetypefile = args[0]
     else:
-        truetypefile = ''
-    if not truetypefile:
         print(help)
         sys.exit(1)
     usr_font = ImageFont.truetype(truetypefile, font_height)
